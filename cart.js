@@ -112,13 +112,13 @@
           }
           else {
             this.message = "Payment succesful! Processing order...";
-            this.cart = [];
-            this.total = 0;
             this.payment = '';
             this.isInputValid = false;
-            this.createCart();
             setTimeout(() => {
+              this.createCart();
               this.message = '';
+              this.total = 0;
+              this.cart = [];
             },3000)
           }
         })
