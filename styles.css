@@ -1,6 +1,5 @@
-
 footer, header {
-    background-color: rgb(255, 183, 0);
+    background-color: rgb(216, 147, 9);
 }
 
 header {
@@ -38,33 +37,37 @@ main, .cart, .menu{
 
 main div {
     background-color: rgba(3, 3, 3, 0.88);
-    border: 9px double rgb(255, 183, 0);
-    color: rgb(255, 183, 0);
+    border: 9px double rgb(216, 147, 9);
+    color: rgb(216, 147, 9);
 
 
 }
 
 .menu div div {
     background-color: rgba(3, 3, 3, 0.7);
-    border: 9px double rgb(255, 183, 0);
-    color: rgb(255, 183, 0);
+    border: 9px double rgb(216, 147, 9);
+    color: rgb(216, 147, 9);
 }
 
 .menu h2{
     background-color: rgba(3, 3, 3, 0.88);
-    border: 9px double rgb(255, 183, 0);
-    color: rgb(255, 183, 0);
+    border: 9px double rgb(216, 147, 9);
+    color: rgb(216, 147, 9);
     margin-top: 0.3em;
     margin-bottom: 0%;
 }
 
 .menu button {
-    background-color: rgb(255, 183, 0);
+    background-color: rgb(216, 147, 9);
 }
 
 .cart div {
     background-color: rgba(3, 3, 3, 0.7);
     margin: 0.5em 0.5em;
+}
+
+td button {
+    background-color: rgb(216, 147, 9);
 }
   
 .small button {
@@ -100,7 +103,6 @@ main div {
     background-position: center;
 }
 
-
 ul {
     margin-top: auto;
     color: beige;
@@ -131,7 +133,7 @@ a:hover {
   }
 
 .tables {
-    color: rgb(255, 183, 0);
+    color: rgb(216, 147, 9);
     width: 100%;
   }
 

@@ -27,7 +27,9 @@
       Click on specific size pizza icon to view flavours!
     </p>
     <main>
-      <div class="small d-flex flex-column justify-content-center">
+      <div
+        class="small d-flex flex-column align-items-center justify-content-center"
+      >
         <h2>Small Pizzas</h2>
         <button
           class="btn btn-primary my-auto"
@@ -66,7 +68,13 @@
             <div class="col-sm-4">
               <span x-text="pizza.flavour"></span>
               <span>: R<span x-text="pizza.price"></span></span><br />
-              <button class="btn" title="Add to your cart">Add</button>
+              <button
+                class="btn"
+                @click="addPizza(pizza.id)"
+                title="Add to your cart"
+              >
+                Add
+              </button>
             </div>
           </template>
         </template>
@@ -82,7 +90,13 @@
             <div class="col-sm-4">
               <span x-text="pizza.flavour"></span>
               <span>: R<span x-text="pizza.price"></span></span><br />
-              <button class="btn" title="Add to your cart">Add</button>
+              <button
+                class="btn"
+                @click="addPizza(pizza.id)"
+                title="Add to your cart"
+              >
+                Add
+              </button>
             </div>
           </template>
         </template>
@@ -98,7 +112,13 @@
             <div class="col-sm-4">
               <span x-text="pizza.flavour"></span>
               <span>: R<span x-text="pizza.price"></span></span><br />
-              <button class="btn" title="Add to your cart">Add</button>
+              <button
+                class="btn"
+                @click="addPizza(pizza.id)"
+                title="Add to your cart"
+              >
+                Add
+              </button>
             </div>
           </template>
         </template>
@@ -121,51 +141,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>R60</td>
-              <td>Small</td>
-              <td>Peri peri</td>
-              <td>
-                <button @click="mediumC++">+</button>
-                <span x-text="mediumC"></span>
-                <button @click="mediumC--">-</button>
-              </td>
-              <td>
-                R<span style="display: inline" x-html="priceS.toFixed(2)">0</span>
-              </td>
-            </tr>
-            
-            <tr>
-              <td>R60</td>
-              <td>Small</td>
-              <td>Peri peri</td>
-              <td>
-                <button @click="mediumC++">+</button>
-                <span x-text="mediumC"></span>
-                <button @click="mediumC--">-</button>
-              </td>
-              <td>
-                R<span style="display: inline" x-html="priceS.toFixed(2)">0</span>
-              </td>
-            </tr>
-
-            <tr>
-              <td>R60</td>
-              <td>Small</td>
-              <td>Peri peri</td>
-              <td>
-                <button @click="mediumC++">+</button>
-                <span x-text="mediumC"></span>
-                <button @click="mediumC--">-</button>
-              </td>
-              <td>
-                R<span style="display: inline" x-html="priceS.toFixed(2)">0</span>
-              </td>
-            </tr>
+            <template x-for="pizza in cart">
+              <tr>
+                <td x-html="pizza.price">R60</td>
+                <td x-html="pizza.size">Small</td>
+                <td x-html="pizza.flavour">Peri peri</td>
+                <td>
+                  <button @click="addPizza(pizza.id)">+</button>
+                  <span x-text="pizza.qty"></span>
+                  <button @click="removePizza(pizza.id)--">-</button>
+                </td>
+                <td>
+                  R<span style="display: inline" x-html="pizza.total.toFixed(2)"
+                    >0</span
+                  >
+                </td>
+              </tr>
+            </template>
           </tbody>
+
           <tr x-show="true">
-            <td x-text="count"></td>
-            <td colspan="3" style="text-align: center">Total:</td>
+            <td colspan="4" style="text-align: center">Total:</td>
             <td>
               R
               <div style="display: inline" x-html="total.toFixed(2)"></div>
@@ -176,23 +172,20 @@
       <div class="text-end">
         <button
           style="background-color: rgb(216, 147, 9)"
-          x-on:click="checkout"
-          x-show="true"
+          x-on:click="amountPaid(payment)"
+          x-bind:disabled="!isInputValid"
         >
           Checkout
         </button>
-        <input type="text" x-show="true" />
-        <p x-show="enjoy" style="text-align: center; color: rgb(216, 147, 9)">
-          "Your order has been processed, kindly wait for your pizza."
-        </p>
-        <p x-show="pay" style="text-align: center; color: rgb(216, 147, 9)">
-          "Sorry - that is not enough money!"
-        </p>
-        <p x-show="niks" style="text-align: center; color: rgb(216, 147, 9)">
-          "Amount not entered"
-        </p>
-        <p x-show="empty" style="text-align: center; color: rgb(216, 147, 9)">
-          "Cart is empty"
+        <input
+          type="number"
+          pattern="[0-9]*"
+          x-show="true"
+          x-model="payment"
+          x-on:input="isInputValid = !!payment"
+          required
+        />
+        <p style="text-align: center; color: rgb(216, 147, 9)" x-html="message">
         </p>
       </div>
     </div>

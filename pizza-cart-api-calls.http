@@ -8,21 +8,21 @@ GET https://pizza-api.projectcodex.net/api/pizzas
 
 ### Create a cart
 
-GET https://pizza-api.projectcodex.net/api/pizza-cart/create?username=Andrew
+GET https://pizza-api.projectcodex.net/api/pizza-cart/create?username=yousha-waja
 
 
 ### Get a cart
 
-GET https://pizza-api.projectcodex.net/api/pizza-cart/6o9Pu4u8zB/get
+GET https://pizza-api.projectcodex.net/api/pizza-cart/BKGUIbr8Ou/get
 
 ### Add a pizza to the cart
-
+ 
 POST https://pizza-api.projectcodex.net/api/pizza-cart/add
 content-type: application/json
 
 {
-	"cart_code" : "6o9Pu4u8zB",
-	"pizza_id" : 3
+	"cart_code" : "BKGUIbr8Ou",
+	"pizza_id" : 9
 }
 
 ### Add a pizza to the cart
@@ -31,8 +31,8 @@ POST https://pizza-api.projectcodex.net/api/pizza-cart/add
 content-type: application/json
 
 {
-	"cart_code" : "6o9Pu4u8zB",
-	"pizza_id" : 11
+	"cart_code" : "BKGUIbr8Ou`",
+	"pizza_id" : 9
 }
 
 ### Remove a pizza from the cart
@@ -41,17 +41,17 @@ POST https://pizza-api.projectcodex.net/api/pizza-cart/remove
 content-type: application/json
 
 {
-	"cart_code" : "6o9Pu4u8zB",
+	"cart_code" : "4sRvA0bX5M",
 	"pizza_id" : 3
 }
 
 ### GET all the carts for a given user
 
-GET https://pizza-api.projectcodex.net/api/pizza-cart/username/Andrew
+GET https://pizza-api.projectcodex.net/api/pizza-cart/username/yousha-waja
 
 ### GET all the active carts for a user
 
-GET https://pizza-api.projectcodex.net/api/pizza-cart/username/Lindani/active
+GET https://pizza-api.projectcodex.net/api/pizza-cart/username/yousha-waja/active
 
 
 ### Pay for a pizza from the cart
