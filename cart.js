@@ -60,18 +60,26 @@
       pizzas : [],
       cart : [],
       username: 'yousha-waja',
-      cartId : 'BKGUIbr8Ou',
+      cartId : '8AI954cnY6',
       total:0.00,
       payment: '',
       isInputValid: false,
       message: '',
 
       getCart() {
-        axios.get( `https://pizza-api.projectcodex.net/api/pizza-cart/${this.cartId}/get`).then((result) => {
+        axios.get(`https://pizza-api.projectcodex.net/api/pizza-cart/${this.cartId}/get`).then((result) => {
           this.cart = result.data.pizzas;
           this.total = result.data.total;
-      });
+      })
       },
+            
+      createCart(){
+        axios.get('https://pizza-api.projectcodex.net/api/pizza-cart/create?username=yousha-waja').then((result)=>{
+          this.cartId = result.data.cart_code;
+
+          this.getCart();
+        })
+  },
 
       addPizza(pizzaId){
         axios.post('https://pizza-api.projectcodex.net/api/pizza-cart/add', {
@@ -95,15 +103,23 @@
           "amount" : payment
         }).then((result)=> {
           if(result.data.status == "failure"){
-              this.message = result.data.message
-              alert(`Amount payable: R${this.total.toFixed(2)}`);
+            this.message = result.data.message + `<br> Insufficient funds! Amount payable: R${this.total.toFixed(2)}`;
+            this.payment = '';
+            this.isInputValid = false;
+            setTimeout(() => {
+              this.message = '';
+            },4000)
           }
           else {
-            this.message = "payment succesful";
+            this.message = "Payment succesful! Processing order...";
             this.cart = [];
             this.total = 0;
             this.payment = '';
             this.isInputValid = false;
+            this.createCart();
+            setTimeout(() => {
+              this.message = '';
+            },3000)
           }
         })
       },
@@ -114,7 +130,7 @@
         .then((result) => {
         this.pizzas = result.data.pizzas;
         });
-        this.getCart();
+        this.createCart();
       },
       
     }));

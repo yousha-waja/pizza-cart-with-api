@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pizza Pamphlet</title>
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
@@ -125,7 +129,7 @@
       </div>
     </div>
 
-    <div class="cart">
+    <div class="cart" x-show="!!total">
       <div>
         <table class="tables">
           <thead x-show="true">
@@ -133,25 +137,25 @@
               <th colspan="5" style="text-align: center">Shopping Cart</th>
             </tr>
             <tr>
-              <th style="text-align: center">Price</th>
-              <th style="text-align: center">Size</th>
-              <th style="text-align: center">Flavour</th>
-              <th style="text-align: center">Quantity</th>
-              <th style="text-align: center">Total</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Size</th>
+              <th class="text-center">Flavour</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Total</th>
             </tr>
           </thead>
           <tbody>
             <template x-for="pizza in cart">
               <tr>
-                <td x-html="pizza.price">R60</td>
-                <td x-html="pizza.size">Small</td>
-                <td x-html="pizza.flavour">Peri peri</td>
-                <td>
+                <td class="text-center" x-html="pizza.price">R60</td>
+                <td class="text-center" x-html="pizza.size">Small</td>
+                <td class="text-center" x-html="pizza.flavour">Peri peri</td>
+                <td class="text-center">
                   <button @click="addPizza(pizza.id)">+</button>
                   <span x-text="pizza.qty"></span>
-                  <button @click="removePizza(pizza.id)--">-</button>
+                  <button @click="removePizza(pizza.id)">-</button>
                 </td>
-                <td>
+                <td class="text-center">
                   R<span style="display: inline" x-html="pizza.total.toFixed(2)"
                     >0</span
                   >
@@ -159,10 +163,9 @@
               </tr>
             </template>
           </tbody>
-
           <tr x-show="true">
-            <td colspan="4" style="text-align: center">Total:</td>
-            <td>
+            <td colspan="4" class="text-center">Total:</td>
+            <td class="text-center">
               R
               <div style="display: inline" x-html="total.toFixed(2)"></div>
             </td>
@@ -185,14 +188,27 @@
           x-on:input="isInputValid = !!payment"
           required
         />
-        <p style="text-align: center; color: rgb(216, 147, 9)" x-html="message">
-        </p>
+        <p
+          style="text-align: center; color: rgb(216, 147, 9)"
+          x-html="message"
+        ></p>
+        <button
+          style="background-color: rgb(216, 147, 9)"
+          x-on:click="createCart()"
+        >
+          Create new cart
+        </button>
       </div>
     </div>
     <footer>
       <div id="contact">
-        <p>Contact us at: (021)-541-1000</p>
-        <p>twitter/facebook/instagram: @perfectpizza</p>
+        <p>
+          <i class="fab fa-twitter"></i>/ <i class="fab fa-instagram"></i> /
+          <i class="fab fa-facebook"></i>: @<a href="#">Perfect_Pizza</a>
+        </p>
+        <span>
+          <i class="fas fa-mobile-alt"></i>: <a href="#">(021)-541-1000</a>
+        </span>
       </div>
       <a href="#" id="address">
         <img src="images/location icon.jpeg" alt="location icon" />
