@@ -3,10 +3,12 @@ footer, header {
 }
 
 header {
-    font-size: 20vh;
+    font-size: 14vh;
     text-align: center;
     text-decoration: underline;
     text-decoration-style: double;
+    width: 100%;
+    height: auto;
 }
 
 footer {
@@ -27,7 +29,7 @@ main, .cart, .menu{
     background-size: cover;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 900px) {
     main {
       display: flex;
       justify-content: space-evenly;
@@ -35,6 +37,18 @@ main, .cart, .menu{
     
 }
 
+@media (max-width: 900px) {
+    .medium {
+      width: 100%;
+    }
+    
+    .show_hide {
+    width: 100%;
+    height: auto;
+}
+
+  }
+  
 main div {
     background-color: rgba(3, 3, 3, 0.88);
     border: 9px double rgb(216, 147, 9);
@@ -61,6 +75,11 @@ main div {
 .menu button {
     background-color: rgb(216, 147, 9);
 }
+
+.button-text {
+
+    font-size: 1em;
+  }  
 
 .cart div {
     background-color: rgba(3, 3, 3, 0.7);
@@ -89,8 +108,8 @@ td button {
     border: 1em double;
     background-image: none !important;
     border-radius: 10% !important;
-    width: 20dvh !important;
-    height: 20dvh !important;
+    width: 100% !important;
+    height: auto !important;
 }
 
 .show_hide:hover {
