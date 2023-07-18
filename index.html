@@ -27,19 +27,23 @@
   </head>
   <body class="container" x-data="counter">
     <header>Perfect Pizza</header>
-    <p style="background-color: rgb(255, 183, 0); margin-bottom: 0.3em">
-      Click on specific size pizza icon to view flavours!
-    </p>
-    <main>
+    <main class="justify-content-center">
       <div
-        class="small d-flex flex-column align-items-center justify-content-center"
+        class="medium d-flex flex-column align-items-center justify-content-center"
       >
         <h2>Small Pizzas</h2>
         <button
           class="btn btn-primary my-auto"
-          title="Click here to view menu for small pizzas."
+          title="Click here to toggle menu for small pizzas."
           x-on:click="visibleS = !visibleS"
         ></button>
+        <button
+          class="btn btn-primary my-auto show_hide"
+          x-on:click="visibleS = !visibleS; showS = !showS; hideS = !hideS "
+        >
+          <span x-show="hideS">Hide menu</span>
+          <span x-show="showS">Show menu</span>
+        </button>
       </div>
       <div
         class="medium d-flex flex-column align-items-center justify-content-center"
@@ -47,12 +51,19 @@
         <h2>Medium Pizzas</h2>
         <button
           class="btn btn-primary my-auto"
-          title="Click here to view menu for medium pizzas."
+          title="Click here to toggle menu for medium pizzas."
           x-on:click="visibleM = !visibleM"
         ></button>
+        <button
+          class="btn btn-primary my-auto show_hide"
+          x-on:click="visibleM = !visibleM; showM = !showM; hideM = !hideM"
+        >
+          <span x-show="hideM">Hide menu</span>
+          <span x-show="showM">Show menu</span>
+        </button>
       </div>
       <div
-        class="large d-flex flex-column align-items-center justify-content-center"
+        class="medium d-flex flex-column align-items-center justify-content-center"
       >
         <h2>Large Pizzas</h2>
         <button
@@ -60,6 +71,13 @@
           title="Click here to view menu for large pizzas."
           x-on:click="visibleL = !visibleL"
         ></button>
+        <button
+          class="btn btn-primary my-auto show_hide"
+          x-on:click="visibleL = !visibleL; showL = !showL; hideL = !hideL "
+        >
+          <span x-show="hideL">Hide menu</span>
+          <span x-show="showL">Show menu</span>
+        </button>
       </div>
     </main>
 
@@ -131,8 +149,8 @@
 
     <div class="cart" x-show="!!total">
       <div>
-        <table class="tables">
-          <thead x-show="true">
+        <table class="tables" x-show="order">
+          <thead>
             <tr>
               <th colspan="5" style="text-align: center">Shopping Cart</th>
             </tr>
@@ -144,7 +162,7 @@
               <th class="text-center">Total</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody x-show="order">
             <template x-for="pizza in cart">
               <tr>
                 <td class="text-center" x-html="pizza.price">R60</td>
@@ -163,16 +181,35 @@
               </tr>
             </template>
           </tbody>
-          <tr x-show="true">
+          <tr>
             <td colspan="4" class="text-center">Total:</td>
             <td class="text-center">
-              R
-              <div style="display: inline" x-html="total.toFixed(2)"></div>
+              <u
+                >R<span
+                  style="background-color: rgba(0, 0, 0, 0.6)"
+                  x-html="total.toFixed(2)"
+                ></span
+              ></u>
             </td>
           </tr>
         </table>
       </div>
       <div class="text-end">
+        <button
+          style="background-color: rgba(216, 9, 9, 0.699)"
+          x-on:click="createCart()"
+        >
+          Clear cart!
+        </button>
+        <span
+          ><button
+            style="background-color: rgb(216, 147, 9)"
+            x-on:click="order = !order; hideCart = !hideCart; showCart = !showCart"
+          >
+            <span x-show="hideCart">Hide cart</span>
+            <span x-show="showCart">Show cart</span>
+          </button></span
+        >
         <button
           style="background-color: rgb(216, 147, 9)"
           x-on:click="amountPaid(payment)"
@@ -189,15 +226,25 @@
           required
         />
         <p
-          style="text-align: center; color: rgb(216, 147, 9)"
-          x-html="message"
-        ></p>
-        <button
-          style="background-color: rgba(216, 9, 9, 0.699)"
-          x-on:click="createCart()"
+          style="text-align: center; color: rgb(216, 9, 9); font-weight: bolder"
+          x-show="message1"
         >
-          Clear cart!
-        </button>
+          Card payment failure! <br />
+          Insufficient funds! Amount payable: R<span
+            x-html="total.toFixed(2)"
+          ></span>
+        </p>
+        <p
+          style="
+            text-align: center;
+            color: rgb(54, 216, 9);
+            font-weight: bolder;
+          "
+          x-show="message2"
+        >
+          Card payment successful! <br />
+          Your change: R<span x-html="change.toFixed(2)"></span>
+        </p>
       </div>
     </div>
     <footer>

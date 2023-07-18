@@ -39,8 +39,9 @@ main div {
     background-color: rgba(3, 3, 3, 0.88);
     border: 9px double rgb(216, 147, 9);
     color: rgb(216, 147, 9);
-
-
+    width: 60dvh;
+    height: 60dvh;
+    
 }
 
 .menu div div {
@@ -70,16 +71,6 @@ td button {
     background-color: rgb(216, 147, 9);
 }
   
-.small button {
-    width: 20dvh;
-    height: 20dvh;
-    border-radius: 100%;
-    margin: auto;
-    margin-bottom: 2vh;
-    background-image: url(./images/pizza-icon.jpeg);
-    background-size: cover;
-    background-position: center;
-}
 
 .medium button {
     width: 30dvh;
@@ -92,15 +83,26 @@ td button {
     background-position: center;
 }
 
-.large button {
-    width: 40dvh;
-    height: 40dvh;
-    border-radius: 100%;
-    margin: auto;
-    margin-bottom: 2vh;
-    background-image: url(./images/pizza-icon.jpeg);
-    background-size: cover;
-    background-position: center;
+.show_hide {
+    background-color: rgb(216, 147, 9);
+    color:black;
+    border: 1em double;
+    background-image: none !important;
+    border-radius: 10% !important;
+    width: 20dvh !important;
+    height: 20dvh !important;
+}
+
+.show_hide:hover {
+        background-color: transparent;
+        color: rgb(216, 147, 9);
+        border-color:rgb(216, 147, 9); ;
+}
+
+.show_hide:active {
+    background-color: rgb(216, 147, 9) !important;
+    border-color: black !important;
+    color: black !important;
 }
 
 ul {

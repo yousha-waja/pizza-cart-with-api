@@ -5,56 +5,21 @@
       visibleM:false,
       visibleL:false,
       visible:false,
-      enjoy:false,
-      pay:false,
-      niks:false,
-      empty: false,
-      count:0,
 
-      // checkout() {
-      //   var input = document.querySelector("input");
-      //   if (this.enjoy === false && parseFloat(input.value) >= parseFloat(this.total)) {
-      //     this.enjoy = true;
-      //     setTimeout(() => {
-      //       this.enjoy = false;
-      //     }, 2000);
-      //     input.value = '';
-      //     this.visibleS = false;
-      //     this.visibleM = false;
-      //     this.visibleL = false;
-      //     this.visible =false;
-      //     this.count = 0;
-      //     this.total = 0;
-      //     this.smallC = 1;
-      //     this.mediumC = 1;
-      //     this.largeC = 1;
-      //     this.priceS = 60.00;
-      //     this.priceM = 89.90;
-      //     this.priceL = 104.90;
-      //   } 
-      //   else if (this.count === 0 && this.total === 0 && this.input !=='') {
-      //       this.empty = true;
-      //       setTimeout(() => {
-      //         this.empty = false;
-      //       }, 2000);
-      //     }else if (this.pay === false && parseFloat(input.value) < parseFloat(this.total)) {
-      //     this.pay = true;
-      //     setTimeout(() => {
-      //       this.pay = false;
-      //     }, 2000);
-      //     input.value = '';
-      //   } else if (input.value === '') {
-      //     this.niks = true;
-      //     setTimeout(() => {
-      //       this.niks = false;
-      //     }, 2000);
-      //   } else if (this.count === 0 && this.total === 0) {
-      //     this.empty = true;
-      //     setTimeout(() => {
-      //       this.empty = false;
-      //     }, 2000);
-      //   }
-      // },
+      showS:true,
+      hideS:false,
+
+      showM:true,
+      hideM:false,
+
+      showL:true,
+      hideL:false,
+
+      showCart:false,
+      hideCart:true,
+
+      order: true,
+      count:0,
 
       //properties list pizzaz
       pizzas : [],
@@ -63,8 +28,10 @@
       cartId : '8AI954cnY6',
       total:0.00,
       payment: '',
+      change:0.00,
       isInputValid: false,
-      message: '',
+      message1: false,
+      message2: false,
 
       getCart() {
         axios.get(`https://pizza-api.projectcodex.net/api/pizza-cart/${this.cartId}/get`).then((result) => {
@@ -103,22 +70,24 @@
           "amount" : payment
         }).then((result)=> {
           if(result.data.status == "failure"){
-            this.message = result.data.message + `<br> Insufficient funds! Amount payable: R${this.total.toFixed(2)}`;
+            this.message1 = true;
             this.payment = '';
             this.isInputValid = false;
             setTimeout(() => {
-              this.message = '';
+              this.message1 = false;
             },4000)
           }
           else {
-            this.message = "Payment succesful! Processing order...";
-            this.payment = '';
+            this.message2 = true;
             this.isInputValid = false;
+            this.change = this.payment - this.total;
             setTimeout(() => {
               this.createCart();
               this.message = '';
               this.total = 0;
               this.cart = [];
+              this.message2 = false;
+              this.payment = '';
             },3000)
           }
         })
