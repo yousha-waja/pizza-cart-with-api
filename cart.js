@@ -56,6 +56,7 @@
           this.getCart();
         })
       },
+      
       removePizza(pizzaId){
         axios.post('https://pizza-api.projectcodex.net/api/pizza-cart/remove', {
           "cart_code" : this.cartId,
